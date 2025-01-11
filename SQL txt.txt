@@ -1,0 +1,24 @@
+#SQL
+
+baby.txst
+baby.s34
+
+
+columns = [ind, date, price]
+
+
+with t1 as (
+select *, price/(lag(price) over (order by ind asc) )-1 as per from baby.txst
+)
+
+select 
+" ", case
+              when per<=-0.015 then -2
+              when per<=-0.0001 and per>-0.015 then -1
+              when per>=-0.0001 and per<0.0001 then 0
+              when per>=0.0001 and per<.015 then 1
+              when per>=0.015 then 2
+          end as hist
+from t1
+
+order by ind
