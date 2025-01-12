@@ -1,5 +1,6 @@
 from collections import defaultdict, Counter
 from value import *
+import csv
 
 # Function to build the transition matrix
 def build_transition_matrix(numbers, memory):
@@ -59,7 +60,8 @@ def predict_next_with_baseline(global_matrix, local_matrix, recent_numbers, memo
     return next_number
 
 # Ensure 'values' is correctly defined in your environment
-values = valuesa
+values = [int(row[0]) for row in csv.reader(open("fsset.csv", mode="r", encoding="utf-8"))]
+
 memory = 5  # Length of the recent numbers to consider
 
 # Check if the dataset is large enough
